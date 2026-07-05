@@ -28,6 +28,15 @@ rules:
   message: Public API changed - update the DocC landing page Topics if public entry
     points changed.
   checksum: 49bb2a47580607b57edcef100406d00be81b0f4693a8aa6f99cff35442c65176
+- name: agents-project
+  sources:
+  - Package.swift
+  - Sources/Interaction/Terminal.swift
+  - Sources/Interaction/Terminal+LineMode.swift
+  doc: AGENTS.md
+  message: Directory structure, entry point, or module layout changed - update AGENTS.md/CLAUDE.md
+    if agent guidance changed.
+  checksum: bbd232d8c32a10235a21d4639671d33b69e0b122be17d38c7a2974cba7bfda87
 excludes:
 - .build/**
 - '**/.build/**'
