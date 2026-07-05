@@ -21,27 +21,49 @@ terminal UI layer.
 
 - <doc:GettingStarted>
 
-### Terminal
+### Text Prompts and Validation
 
+- <doc:TextPrompts>
+- ``TextPrompt``
+- ``ConfirmationPrompt``
+- ``ValidationRule``
+- ``PredicateValidationRule``
+- ``ValidationError``
+- ``NonEmptyRule``
+
+### Choice Menus
+
+- <doc:ChoiceMenus>
+- ``ChoicePrompt``
+- ``MultipleChoicePrompt``
+- ``ChoiceOption``
+- ``SingleSelectionState``
+- ``MultipleSelectionState``
+
+### Styled Text and Tables
+
+- <doc:StyledOutput>
+- ``StyledText``
+- ``Table``
+- ``TableHeader``
+- ``TableRow``
+- ``TableRenderer``
+- ``TableBuilder``
+- ``TableCellBuilder``
+- ``TableElement``
+
+### Terminal Environment and Custom Backends
+
+- <doc:TerminalEnvironment>
 - ``Terminal``
 - ``TerminalCapabilities``
 - ``InteractionProviding``
-
-### Prompts
-
-- ``TextPrompt``
-- ``ChoicePrompt``
-- ``MultipleChoicePrompt``
-- ``ConfirmationPrompt``
-- ``ChoiceOption``
-
-### Styling and Layout
-
-- ``StyledText``
-- ``Table``
-
-### Validation
-
-- ``ValidationRule``
-- ``ValidationError``
-- ``NonEmptyRule``
+- ``Status``
+- ``TextInput``
+- ``TextOutput``
+- ``StandardInput``
+- ``StandardOutput``
+- ``KeyInput``
+- ``TerminalKey``
+- ``StandardKeyInput``
+- ``LineBuffer``

@@ -24,6 +24,10 @@ let proceed = terminal.confirm(ConfirmationPrompt(question: "Continue?"))
 
 ## Next steps
 
-Explore ``ChoicePrompt`` and ``MultipleChoicePrompt`` for selection menus,
-``Table`` for tabular output, ``StyledText`` for semantic styling, and
-``ValidationRule`` for validated input.
+- <doc:TextPrompts> covers validated text input and yes/no confirmations in
+  depth.
+- <doc:ChoiceMenus> covers single- and multiple-choice menus, filtering, and
+  selection limits.
+- <doc:StyledOutput> covers semantic text styling and table rendering.
+- <doc:TerminalEnvironment> covers capability detection, non-interactive
+  fallbacks, and building a custom backend.
