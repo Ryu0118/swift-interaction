@@ -68,6 +68,16 @@ degrades gracefully in non-TTY contexts.
 ## Reference
 
 The full API is documented at
-[ryu0118.github.io/swift-interaction/documentation/interaction](https://ryu0118.github.io/swift-interaction/documentation/interaction/).
+[ryu0118.github.io/swift-interaction/documentation/interaction](https://ryu0118.github.io/swift-interaction/documentation/interaction/),
+but that page renders its content with JavaScript, so a plain fetch of it
+returns an empty shell. For agents, fetch the underlying DocC data instead —
+it's plain JSON, one file per symbol, lowercased:
+
+```
+https://ryu0118.github.io/swift-interaction/data/documentation/interaction.json           # module overview
+https://ryu0118.github.io/swift-interaction/data/documentation/interaction/terminal.json   # Terminal
+https://ryu0118.github.io/swift-interaction/data/documentation/interaction/textprompt.json # TextPrompt
+```
+
 Exact initializer labels and signatures are authoritative there, so check
 before relying on a snippet here.

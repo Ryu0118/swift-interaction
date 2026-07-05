@@ -18,7 +18,7 @@ rules:
   doc: README.md
   message: Agent skill/plugin surface changed - review README Quick Start for Agents
     and update if Claude Code / Codex plugin usage changed.
-  checksum: ac23242a8c56632548e0320f089fb03e08eaa2a00234711ab388868af538af77
+  checksum: 6a4ace1022dbc2f8fd38bb93949f0627cde5943bb91eaae53f011331ac9a3e49
 - name: docc-landing
   sources:
   - Sources/Interaction/Prompts/Prompt.swift
