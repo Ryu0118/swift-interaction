@@ -89,7 +89,7 @@ Requires **macOS 26+** and **Swift 6.2**.
 ## Documentation
 
 Full API documentation is published at
-[ryu0118.github.io/swift-interaction](https://ryu0118.github.io/swift-interaction/).
+[ryu0118.github.io/swift-interaction/documentation/interaction](https://ryu0118.github.io/swift-interaction/documentation/interaction/).
 
 The DocC catalog lives in `Sources/Interaction/Interaction.docc`. Generate the
 archive locally with SwiftPM:
