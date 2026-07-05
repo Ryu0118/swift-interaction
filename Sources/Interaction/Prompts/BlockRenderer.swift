@@ -24,6 +24,8 @@ struct BlockRenderer {
         var text = rewindSequence() + lines.joined(separator: "\n") + "\n"
 
         if let cursor {
+            // Move up from the last printed line to the requested cursor line, then
+            // return to column 0 (`\r`) before nudging right (`C`) if needed.
             text += "\u{1B}[\(lines.count - cursor.line)A\r"
             if cursor.column > 0 {
                 text += "\u{1B}[\(cursor.column)C"
@@ -44,6 +46,9 @@ struct BlockRenderer {
         cursorLine = 0
     }
 
+    /// Moves the cursor back to the top-left of the previously rendered block and
+    /// erases everything from there to the end of the screen, so the next `render`
+    /// overwrites it in place instead of appending below it.
     private func rewindSequence() -> String {
         guard renderedLineCount > 0 else { return "" }
         let up = cursorLine > 0 ? "\u{1B}[\(cursorLine)A" : ""

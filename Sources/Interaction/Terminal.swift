@@ -225,6 +225,12 @@ public struct Terminal: InteractionProviding {
         output.write(text)
     }
 
+    /// Parses a comma/space-separated list of 1-based option numbers.
+    ///
+    /// Duplicate numbers collapse to one selection, and any token that fails
+    /// to parse or falls outside the valid range is silently dropped rather
+    /// than rejecting the whole line — the resulting count is then checked
+    /// against `minimumSelectionCount`/`maximumSelectionCount` by the caller.
     private func parseIndexes(_ input: String, optionCount: Int) -> [Int] {
         let seen = Set(
             input

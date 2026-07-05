@@ -8,7 +8,7 @@ rules:
   doc: README.md
   message: Public Interaction API changed - review README usage snippets and update
     if the prompt/choice/table/validation surface changed.
-  checksum: b41b0a518f8c572db513a91923f2ee2b47e5ded968133c9d2b937ec5c3e62c65
+  checksum: cd068c7249c1570b9b0089b2e43658b5fb830689f33999755fae02d5e2e3da7b
 - name: readme-agent-integrations
   sources:
   - .claude/plugins/interaction/.claude-plugin/plugin.json
@@ -27,7 +27,7 @@ rules:
   doc: Sources/Interaction/Interaction.docc/Interaction.md
   message: Public API changed - update the DocC landing page Topics if public entry
     points changed.
-  checksum: fe3a222d7bb4721e8ef5fbfef9721f8905dc69f29c5ba63f7c80c75806c122e3
+  checksum: 49bb2a47580607b57edcef100406d00be81b0f4693a8aa6f99cff35442c65176
 excludes:
 - .build/**
 - '**/.build/**'

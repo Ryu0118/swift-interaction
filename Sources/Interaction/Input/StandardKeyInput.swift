@@ -37,6 +37,11 @@ public struct StandardKeyInput: KeyInput {
         return count == 1 ? byte : nil
     }
 
+    /// Decodes an ANSI CSI sequence (`ESC [ <final byte>`) for the arrow and
+    /// delete keys. A lone ESC not followed by `[`, or a `[` followed by an
+    /// unrecognized final byte, is treated as the start of the *next* key
+    /// rather than reported as-is, since bare ESC has no `TerminalKey` case.
+    /// Delete is `ESC [ 3 ~`; the trailing `~` byte is read and discarded.
     private func readEscapeSequence() -> TerminalKey? {
         guard readByte() == UInt8(ascii: "[") else {
             return readKey()
@@ -71,6 +76,10 @@ public struct StandardKeyInput: KeyInput {
 }
 
 private extension UInt8 {
+    /// Number of additional UTF-8 continuation bytes that follow this byte
+    /// when it is a multi-byte lead byte, per the UTF-8 byte-length ranges
+    /// (0xC0-0xDF: 2-byte sequence, 0xE0-0xEF: 3-byte, 0xF0-0xF7: 4-byte).
+    /// Zero for single-byte ASCII and for stray continuation/invalid bytes.
     var utf8ContinuationCount: Int {
         switch self {
         case 0xC0 ... 0xDF: 1

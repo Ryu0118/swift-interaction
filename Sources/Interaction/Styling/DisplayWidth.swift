@@ -74,6 +74,11 @@ private extension Unicode.Scalar {
         properties.isEmojiPresentation || properties.isEmojiModifier || properties.isEmojiModifierBase || isRegionalIndicator
     }
 
+    /// Combining marks, NUL, and the two Unicode mechanisms used to build
+    /// multi-scalar grapheme clusters (ZWJ `U+200D` for emoji sequences like
+    /// family/profession emoji, and variation selectors `U+FE00...FE0F` that
+    /// pick an emoji vs. text presentation) all occupy zero terminal columns
+    /// on their own — their width is already counted via the base scalar.
     var isZeroWidth: Bool {
         properties.generalCategory == .nonspacingMark ||
             properties.generalCategory == .enclosingMark ||
@@ -86,6 +91,9 @@ private extension Unicode.Scalar {
         (0x1F1E6 ... 0x1F1FF).contains(value)
     }
 
+    /// Whether Unicode East Asian Width classifies this scalar as Wide (W) or
+    /// Fullwidth (F), i.e. it renders as two terminal columns. See UAX #11:
+    /// https://www.unicode.org/reports/tr11/
     var isWide: Bool {
         switch value {
         case 0x1100 ... 0x115F,

@@ -197,6 +197,9 @@ public struct TableRenderer: Sendable {
         let naturalCellWidth = naturalWidths.reduce(0, +)
         guard naturalCellWidth > availableCellWidth else { return naturalWidths }
 
+        // Terminates because each iteration either shrinks the widest column by 1
+        // or breaks: once every column has hit the width=1 floor, `widths[widestIndex]
+        // > 1` fails and the loop exits even if the table still doesn't fit.
         var widths = naturalWidths.map { max($0, 1) }
         while widths.reduce(0, +) > availableCellWidth {
             guard let widestIndex = widths.indices.max(by: { widths[$0] < widths[$1] }),
