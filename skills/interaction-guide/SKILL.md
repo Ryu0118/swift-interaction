@@ -67,7 +67,7 @@ degrades gracefully in non-TTY contexts.
 
 ## Reference
 
-The full API is documented in the DocC archive built with `make docs`, and in
-the public declarations under `Sources/Interaction/`. Exact initializer labels
-and signatures are authoritative in the source, so check them before relying
-on a snippet here.
+The full API is documented at
+[ryu0118.github.io/swift-interaction/documentation/interaction](https://ryu0118.github.io/swift-interaction/documentation/interaction/).
+Exact initializer labels and signatures are authoritative there, so check
+before relying on a snippet here.
