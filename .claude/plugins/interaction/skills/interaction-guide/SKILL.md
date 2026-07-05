@@ -6,7 +6,7 @@ description: |
 
 # Interaction API Guide
 
-`Interaction` is a dependency-free Swift library for terminal interaction on macOS 26+.
+`Interaction` is a Swift library for terminal interaction on macOS 26+.
 
 ## Add the dependency
 
@@ -57,8 +57,8 @@ let many = terminal.chooseMany(MultipleChoicePrompt(question: "Pick some", optio
 
 `StyledText` provides semantic segments (`primary`, `muted`, `accent`, `danger`,
 `success`, `info`, `path`, `command`, `link`) that render with ANSI color when
-the terminal supports it. `Table` renders aligned, Unicode-width-correct output
-via `terminal.writeTable(_:)`.
+the terminal supports it. `Table` renders aligned output via
+`terminal.writeTable(_:)`.
 
 ## Terminal capabilities
 

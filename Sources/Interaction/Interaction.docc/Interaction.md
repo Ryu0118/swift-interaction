@@ -1,13 +1,12 @@
 # ``Interaction``
 
-Build Unicode-aware terminal interactions — prompts, choices, tables, and styled text — with zero dependencies.
+Build terminal interactions — prompts, choices, tables, and styled text — for macOS command line tools.
 
 ## Overview
 
-Interaction is a dependency-free terminal interaction library for Swift. It
-provides text prompts, single- and multiple-choice selection, table rendering,
-styled text, validation primitives, and terminal capability detection, all with
-correct handling of wide characters and ANSI escape sequences.
+Interaction is a terminal interaction library for Swift. It provides text
+prompts, single- and multiple-choice selection, table rendering, styled text,
+validation primitives, and terminal capability detection.
 
 ``Terminal`` is the entry point: construct one and call ``Terminal/readText(_:)``,
 ``Terminal/confirm(_:)``, ``Terminal/choose(_:)``, ``Terminal/chooseMany(_:)``,

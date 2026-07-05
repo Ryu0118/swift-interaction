@@ -1,7 +1,7 @@
 # 🖥️ Interaction
 
-**A dependency-free terminal interaction library for Swift — prompts, choices,
-tables, and styled text with correct Unicode width handling.**
+**A terminal interaction library for Swift — prompts, choices, tables, and
+styled text for macOS command line tools.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Swift](https://img.shields.io/badge/Swift-6.2-F05138?logo=swift&logoColor=white)](https://swift.org)
@@ -9,7 +9,7 @@ tables, and styled text with correct Unicode width handling.**
 
 Interaction powers the interactive command line in the [egg](https://github.com/Ryu0118/Egg)
 scaffolding tool. It gives any macOS Swift CLI a polished, testable terminal UI
-layer with zero third-party dependencies.
+layer.
 
 ## Features
 
@@ -17,8 +17,8 @@ layer with zero third-party dependencies.
   built-in `NonEmptyRule` or your own types conforming to `ValidationRule` /
   `PredicateValidationRule`.
 - 📋 **Single & multiple choice** — arrow-key navigable, filterable menus.
-- 🎨 **Styled text & tables** — semantic ANSI styling and Unicode-width-correct
-  table rendering that degrades gracefully in non-TTY contexts.
+- 🎨 **Styled text & tables** — semantic ANSI styling and aligned table
+  rendering that degrades gracefully in non-TTY contexts.
 
 ## Quick Start for Agents
 

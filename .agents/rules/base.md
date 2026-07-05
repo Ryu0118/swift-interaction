@@ -1,6 +1,6 @@
 # Interaction — A Terminal Interaction Library
 
-A dependency-free Swift library for building terminal UIs on macOS 26+: text prompts, single/multiple choice menus, table rendering, styled text, validation primitives, and Unicode-aware input.
+A Swift library for building terminal UIs on macOS 26+: text prompts, single/multiple choice menus, table rendering, styled text, and validation primitives.
 
 ## Directory Structure
 
@@ -24,6 +24,6 @@ A dependency-free Swift library for building terminal UIs on macOS 26+: text pro
 
 - Swift 6.2 / macOS 26+
 - Use `public` for the library API surface; `package` only for module-internal cross-file helpers.
-- No external dependencies except `swift-docc-plugin` (docs only). Keep it that way.
+- Runtime code has no external package dependencies (only `swift-docc-plugin`, for docs). Do not add runtime dependencies without a strong reason.
 - `make lint` runs both SwiftLint and my-swift-linter. Install hooks with `make hooks`; pre-push runs `make my-lint`.
 - `make docs` builds the Interaction DocC archive.
