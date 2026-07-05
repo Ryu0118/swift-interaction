@@ -44,6 +44,7 @@ terminal UI layer.
 
 - <doc:StyledOutput>
 - ``StyledText``
+- ``StyledTextRenderer``
 - ``Table``
 - ``TableHeader``
 - ``TableRow``
