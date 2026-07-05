@@ -1,0 +1,74 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Sources/**'
+      - 'Tests/**'
+      - 'Package.swift'
+      - 'Package.resolved'
+      - '.swiftlint.yml'
+      - '.swift-ast-lint.yml'
+      - '.swiftformat'
+      - 'nestfile.yaml'
+      - 'scripts/nest.sh'
+      - '.github/workflows/test.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'Sources/**'
+      - 'Tests/**'
+      - 'Package.swift'
+      - 'Package.resolved'
+      - '.swiftlint.yml'
+      - '.swift-ast-lint.yml'
+      - '.swiftformat'
+      - 'nestfile.yaml'
+      - 'scripts/nest.sh'
+      - '.github/workflows/test.yml'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  swiftlint:
+    name: Lint
+    runs-on: macos-26
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Bootstrap dev tools
+        run: ./scripts/nest.sh bootstrap nestfile.yaml
+
+      - name: SwiftFormat
+        run: .nest/bin/swiftformat --lint --config .swiftformat .
+
+      - name: SwiftLint
+        run: make swiftlint
+
+      - name: My Swift Linter
+        run: make my-lint
+
+  unit-tests:
+    name: Unit Tests
+    needs: swiftlint
+    runs-on: macos-26
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Show Swift version
+        run: swift --version
+
+      - name: Run InteractionTests
+        run: swift test

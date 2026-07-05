@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SRCROOT=$(git rev-parse --show-toplevel)
+cd "$SRCROOT"
+
+make my-lint

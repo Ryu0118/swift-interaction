@@ -1,0 +1,30 @@
+rules:
+- name: readme-api
+  sources:
+  - Sources/Interaction/Prompt.swift
+  - Sources/Interaction/StyledText.swift
+  - Sources/Interaction/Table.swift
+  - Sources/Interaction/Validation.swift
+  doc: README.md
+  message: Public Interaction API changed - review README usage snippets and update
+    if the prompt/choice/table/validation surface changed.
+  checksum: 7f5b7b1ebf2956dd0570eb1b7c50eaf30f44edd03e16d0806d84e6a9d7761733
+- name: readme-agent-integrations
+  sources:
+  - .claude/plugins/interaction/.claude-plugin/plugin.json
+  - .claude/plugins/interaction/skills/interaction-guide/SKILL.md
+  - plugins/interaction/.codex-plugin/plugin.json
+  - .agents/plugins/marketplace.json
+  doc: README.md
+  message: Agent skill/plugin surface changed - review README Quick Start for Agents
+    and update if Claude Code / Codex plugin usage changed.
+  checksum: 6ad171dc3b6722920cc52b3d16c013436697243b695da99b1fe57ab22970ef9c
+- name: docc-landing
+  sources:
+  - Sources/Interaction/Prompt.swift
+  - Sources/Interaction/StyledText.swift
+  - Sources/Interaction/Table.swift
+  doc: Sources/Interaction/Interaction.docc/Interaction.md
+  message: Public API changed - update the DocC landing page Topics if public entry
+    points changed.
+  checksum: e87020277de39cfbb11f4eee13e4353fdf1cd8a30210c11d938086543c8f5210

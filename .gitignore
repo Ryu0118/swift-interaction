@@ -1,0 +1,12 @@
+.DS_Store
+/.build
+/Packages
+xcuserdata/
+DerivedData/
+.swiftpm/
+.netrc
+.claude/settings.local.json
+.nest/
+.tmp-home/
+.serena
+.plan/

@@ -1,0 +1,17 @@
+{
+  "name": "interaction",
+  "owner": {
+    "name": "Ryu0118"
+  },
+  "metadata": {
+    "description": "Official Interaction library API skill for Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "interaction",
+      "source": "./.claude/plugins/interaction",
+      "category": "productivity"
+    }
+  ]
+}
