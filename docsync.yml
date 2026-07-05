@@ -12,13 +12,13 @@ rules:
 - name: readme-agent-integrations
   sources:
   - .claude/plugins/interaction/.claude-plugin/plugin.json
-  - .claude/plugins/interaction/skills/interaction-guide/SKILL.md
+  - skills/interaction-guide/SKILL.md
   - plugins/interaction/.codex-plugin/plugin.json
   - .agents/plugins/marketplace.json
   doc: README.md
   message: Agent skill/plugin surface changed - review README Quick Start for Agents
     and update if Claude Code / Codex plugin usage changed.
-  checksum: b604fc522029774dcbbf903fe8ea2d3ab9a004f2d5f8d060385900a2794c855e
+  checksum: 47a514c41966f846978883443081fda802a57ec5fe969f081ae23dfadba73b97
 - name: docc-landing
   sources:
   - Sources/Interaction/Prompt.swift
