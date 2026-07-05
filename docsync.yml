@@ -1,14 +1,14 @@
 rules:
 - name: readme-api
   sources:
-  - Sources/Interaction/Prompt.swift
-  - Sources/Interaction/StyledText.swift
+  - Sources/Interaction/Prompts/Prompt.swift
+  - Sources/Interaction/Styling/StyledText.swift
   - Sources/Interaction/Table.swift
   - Sources/Interaction/Validation.swift
   doc: README.md
   message: Public Interaction API changed - review README usage snippets and update
     if the prompt/choice/table/validation surface changed.
-  checksum: 7f5b7b1ebf2956dd0570eb1b7c50eaf30f44edd03e16d0806d84e6a9d7761733
+  checksum: b41b0a518f8c572db513a91923f2ee2b47e5ded968133c9d2b937ec5c3e62c65
 - name: readme-agent-integrations
   sources:
   - .claude/plugins/interaction/.claude-plugin/plugin.json
@@ -21,13 +21,13 @@ rules:
   checksum: 47a514c41966f846978883443081fda802a57ec5fe969f081ae23dfadba73b97
 - name: docc-landing
   sources:
-  - Sources/Interaction/Prompt.swift
-  - Sources/Interaction/StyledText.swift
+  - Sources/Interaction/Prompts/Prompt.swift
+  - Sources/Interaction/Styling/StyledText.swift
   - Sources/Interaction/Table.swift
   doc: Sources/Interaction/Interaction.docc/Interaction.md
   message: Public API changed - update the DocC landing page Topics if public entry
     points changed.
-  checksum: e87020277de39cfbb11f4eee13e4353fdf1cd8a30210c11d938086543c8f5210
+  checksum: fe3a222d7bb4721e8ef5fbfef9721f8905dc69f29c5ba63f7c80c75806c122e3
 excludes:
 - .build/**
 - '**/.build/**'
