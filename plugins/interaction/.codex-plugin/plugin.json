@@ -18,7 +18,7 @@
   "interface": {
     "displayName": "Interaction",
     "shortDescription": "Use the Interaction Swift library from Codex.",
-    "longDescription": "Interaction provides Codex with API guidance for building terminal UIs — prompts, choices, tables, and styled text — with the Interaction Swift library.",
+    "longDescription": "Interaction provides Codex with API guidance for building terminal UIs, including prompts, choices, tables, and styled text, with the Interaction Swift library.",
     "developerName": "Ryu0118",
     "category": "Productivity",
     "capabilities": [

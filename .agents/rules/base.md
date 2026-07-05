@@ -1,4 +1,4 @@
-# Interaction — A Terminal Interaction Library
+# Interaction - A Terminal Interaction Library
 
 A Swift library for building terminal UIs on macOS 26+: text prompts, single/multiple choice menus, table rendering, styled text, and validation primitives.
 

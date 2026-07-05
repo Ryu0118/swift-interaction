@@ -1,6 +1,6 @@
 # ``Interaction``
 
-Build terminal interactions — prompts, choices, tables, and styled text — for macOS command line tools.
+Build terminal interactions for macOS command line tools, including prompts, choices, tables, and styled text.
 
 ## Overview
 

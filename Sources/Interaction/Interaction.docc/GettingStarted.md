@@ -9,7 +9,7 @@ Add Interaction to a package and drive your first prompt.
 .package(url: "https://github.com/Ryu0118/swift-interaction", from: "0.1.0"),
 ```
 
-Then add `"Interaction"` — as `.product(name: "Interaction", package: "swift-interaction")` — to your target's dependencies.
+Then add `.product(name: "Interaction", package: "swift-interaction")` to your target's dependencies.
 
 ## Read text and confirm
 

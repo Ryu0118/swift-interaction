@@ -1,7 +1,7 @@
 # 🖥️ Interaction
 
-**A terminal interaction library for Swift — prompts, choices, tables, and
-styled text for macOS command line tools.**
+**A terminal interaction library for Swift, providing prompts, choices,
+tables, and styled text for macOS command line tools.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Swift](https://img.shields.io/badge/Swift-6.2-F05138?logo=swift&logoColor=white)](https://swift.org)
@@ -13,12 +13,11 @@ layer.
 
 ## Features
 
-- ⌨️ **Prompts with validation** — read text input, validated with the
-  built-in `NonEmptyRule` or your own types conforming to `ValidationRule` /
-  `PredicateValidationRule`.
-- 📋 **Single & multiple choice** — arrow-key navigable, filterable menus.
-- 🎨 **Styled text & tables** — semantic ANSI styling and aligned table
-  rendering that degrades gracefully in non-TTY contexts.
+- ⌨️ Read validated text input using the built-in `NonEmptyRule` or your own
+  types conforming to `ValidationRule` and `PredicateValidationRule`.
+- 📋 Present arrow-key navigable, filterable single- and multiple-choice menus.
+- 🎨 Render semantic ANSI-styled text and aligned tables that degrade
+  gracefully in non-TTY contexts.
 
 ## Quick Start for Agents
 
