@@ -12,8 +12,7 @@ validation primitives, and terminal capability detection.
 ``Terminal/confirm(_:)``, ``Terminal/choose(_:)``, ``Terminal/chooseMany(_:)``,
 ``Terminal/write(_:)``, and ``Terminal/writeTable(_:)``.
 
-It powers the interactive command line experience in the egg scaffolding tool,
-and can be adopted by any macOS Swift CLI that needs a polished, testable
+It can be adopted by any macOS Swift CLI that needs a polished, testable
 terminal UI layer.
 
 ## Topics

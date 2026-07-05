@@ -7,9 +7,7 @@ tables, and styled text for macOS command line tools.**
 [![Swift](https://img.shields.io/badge/Swift-6.2-F05138?logo=swift&logoColor=white)](https://swift.org)
 [![Platform](https://img.shields.io/badge/platform-macOS%2026%2B-lightgrey)](https://developer.apple.com/macos/)
 
-Interaction powers the interactive command line in the [egg](https://github.com/Ryu0118/Egg)
-scaffolding tool. It gives any macOS Swift CLI a polished, testable terminal UI
-layer.
+Interaction gives any macOS Swift CLI a polished, testable terminal UI layer.
 
 ## Features
 
@@ -90,9 +88,11 @@ Requires **macOS 26+** and **Swift 6.2**.
 
 ## Documentation
 
-DocC documentation lives in `Sources/Interaction/Interaction.docc`.
+Full API documentation is published at
+[ryu0118.github.io/swift-interaction](https://ryu0118.github.io/swift-interaction/).
 
-Generate the DocC archive with SwiftPM:
+The DocC catalog lives in `Sources/Interaction/Interaction.docc`. Generate the
+archive locally with SwiftPM:
 
 ```sh
 make docs
