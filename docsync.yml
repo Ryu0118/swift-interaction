@@ -28,3 +28,11 @@ rules:
   message: Public API changed - update the DocC landing page Topics if public entry
     points changed.
   checksum: e87020277de39cfbb11f4eee13e4353fdf1cd8a30210c11d938086543c8f5210
+excludes:
+- .build/**
+- '**/.build/**'
+- .swiftpm/**
+- '**/.swiftpm/**'
+- .nest/**
+- .git/**
+- '**/.DS_Store'
