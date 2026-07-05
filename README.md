@@ -7,6 +7,8 @@ tables, and styled text for macOS command line tools.**
 [![Swift](https://img.shields.io/badge/Swift-6.2-F05138?logo=swift&logoColor=white)](https://swift.org)
 [![Platform](https://img.shields.io/badge/platform-macOS%2026%2B-lightgrey)](https://developer.apple.com/macos/)
 
+**[Full API documentation →](https://ryu0118.github.io/swift-interaction/documentation/interaction/)**
+
 Interaction gives any macOS Swift CLI a polished, testable terminal UI layer.
 
 ## Features
