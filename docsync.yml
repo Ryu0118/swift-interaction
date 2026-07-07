@@ -8,7 +8,7 @@ rules:
   doc: README.md
   message: Public Interaction API changed - review README usage snippets and update
     if the prompt/choice/table/validation surface changed.
-  checksum: cd068c7249c1570b9b0089b2e43658b5fb830689f33999755fae02d5e2e3da7b
+  checksum: 207e92a1437d9990eea9ba9987f094b264b05f1323cf921678f75deabf1e1d6d
 - name: readme-agent-integrations
   sources:
   - .claude/plugins/interaction/.claude-plugin/plugin.json
@@ -18,7 +18,7 @@ rules:
   doc: README.md
   message: Agent skill/plugin surface changed - review README Quick Start for Agents
     and update if Claude Code / Codex plugin usage changed.
-  checksum: 6a4ace1022dbc2f8fd38bb93949f0627cde5943bb91eaae53f011331ac9a3e49
+  checksum: 11d93c0c4a93e109b096f19ec37a3c534eeb7b7a0a0e944695e804ef65d4c6a3
 - name: docc-landing
   sources:
   - Sources/Interaction/Prompts/Prompt.swift
@@ -27,7 +27,7 @@ rules:
   doc: Sources/Interaction/Interaction.docc/Interaction.md
   message: Public API changed - update the DocC landing page Topics if public entry
     points changed.
-  checksum: 49bb2a47580607b57edcef100406d00be81b0f4693a8aa6f99cff35442c65176
+  checksum: 50aa032c136a6e5d244ee18bf20d06269c7337d1f279dd7a86e0f998498b1559
 - name: agents-project
   sources:
   - Package.swift
@@ -36,7 +36,7 @@ rules:
   doc: AGENTS.md
   message: Directory structure, entry point, or module layout changed - update AGENTS.md/CLAUDE.md
     if agent guidance changed.
-  checksum: bbd232d8c32a10235a21d4639671d33b69e0b122be17d38c7a2974cba7bfda87
+  checksum: a5e96eeafdfb1c5b9e6955130502be833e2569dc68d475b5de98ad7caaa96b34
 excludes:
 - .build/**
 - '**/.build/**'
