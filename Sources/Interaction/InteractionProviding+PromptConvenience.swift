@@ -5,9 +5,9 @@ public extension InteractionProviding {
         prompt: StyledText,
         description: StyledText? = nil,
         collapsesOnAnswer: Bool = true,
-        validationRules: [any ValidationRule] = [],
-    ) -> String {
-        readText(
+        validationRules: [ValidationRule] = [],
+    ) async -> String {
+        await readText(
             TextPrompt(
                 title: title,
                 message: prompt,

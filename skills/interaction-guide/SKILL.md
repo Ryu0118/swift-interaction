@@ -24,24 +24,32 @@ import Interaction
 
 let terminal = Terminal()
 
-let name = terminal.readText(TextPrompt(message: "What is your name?"))
+let name = await terminal.readText(TextPrompt(message: "What is your name?"))
 let proceed = terminal.confirm(ConfirmationPrompt(question: "Continue?"))
 ```
 
-`Terminal`'s methods: `readText(_:)`, `confirm(_:)`, `choose(_:)`,
+`Terminal`'s methods: `readText(_:)` (async), `confirm(_:)`, `choose(_:)`,
 `chooseMany(_:)`, `write(_:)`, `writeStatus(_:_:)`, `writeTable(_:)`.
 
 ## Text prompts
 
 `TextPrompt(message:)` reads a line of input. Attach `validationRules:` for
-built-in validation. `ValidationRule`, `NonEmptyRule`, and `ValidationError`
-live in the same module.
+built-in validation. `ValidationRule` and `ValidationError` live in the same
+module; `ValidationRule` is a closure-backed value type, so custom rules are
+created by calling its initializer, not by declaring a conforming type.
 
 ```swift
-let value = terminal.readText(
-    TextPrompt(message: "Module name", validationRules: [NonEmptyRule()])
+let value = await terminal.readText(
+    TextPrompt(message: "Module name", validationRules: [.nonEmpty()])
 )
+
+let maxLength = ValidationRule { input in
+    input.count <= 40 ? nil : ValidationError("Must be 40 characters or fewer.")
+}
 ```
+
+A rule's closure may `await` asynchronous work (e.g. a filesystem check)
+before returning its verdict.
 
 ## Single / multiple choice
 

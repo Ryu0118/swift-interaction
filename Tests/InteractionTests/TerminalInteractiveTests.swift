@@ -101,22 +101,22 @@ struct TerminalInteractiveTests {
     }
 
     @Test("typing two characters, moving left, backspacing, and typing another character produces the edited buffer contents, not the original keystroke order")
-    func readTextEditsTheBufferWithCursorKeys() {
+    func readTextEditsTheBufferWithCursorKeys() async {
         let (terminal, _) = Self.makeTerminal(
             keys: [.character("a"), .character("b"), .left, .backspace, .character("c"), .enter],
         )
 
-        let answer = terminal.readText(TextPrompt(message: "Name:"))
+        let answer = await terminal.readText(TextPrompt(message: "Name:"))
 
         #expect(answer == "cb")
     }
 
     @Test("submitting empty input against a non-empty validation rule re-prompts with an error message until valid text is entered")
-    func readTextRePromptsUntilValidationPasses() {
+    func readTextRePromptsUntilValidationPasses() async {
         let (terminal, output) = Self.makeTerminal(keys: [.enter, .character("x"), .enter])
 
-        let answer = terminal.readText(
-            TextPrompt(message: "Name:", validationRules: [NonEmptyRule()]),
+        let answer = await terminal.readText(
+            TextPrompt(message: "Name:", validationRules: [.nonEmpty()]),
         )
 
         #expect(answer == "x")

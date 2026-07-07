@@ -1,7 +1,7 @@
 @testable import Interaction
 import Testing
 
-@Suite("Validates ValidationError, PredicateValidationRule, and rule collections used by text prompts")
+@Suite("Validates ValidationError, ValidationRule, and rule collections used by text prompts")
 struct ValidationTests {
     @Test("a ValidationError's localizedDescription returns the message it was constructed with")
     func validationErrorExposesLocalizedMessage() {
@@ -10,44 +10,44 @@ struct ValidationTests {
         #expect(error.localizedDescription == "Expected message")
     }
 
-    @Test("NonEmptyRule returns nil for non-empty input and returns its configured message for empty input")
-    func validationRulesReturnNilForValidInput() {
-        let rule = NonEmptyRule(message: "Required")
+    @Test(".nonEmpty returns nil for non-empty input and returns its configured message for empty input")
+    func nonEmptyRuleReturnsNilForValidInput() async {
+        let rule = ValidationRule.nonEmpty(message: "Required")
 
-        #expect(rule.validate("value") == nil)
-        #expect(rule.validate("")?.message == "Required")
+        await #expect(rule("value") == nil)
+        await #expect(rule("")?.message == "Required")
     }
 
     @Test("an array of validation rules returns the messages of every rule that fails, and an empty array when input satisfies all rules")
-    func validationRuleCollectionsReturnErrors() {
-        struct ShortRule: PredicateValidationRule {
-            let error = ValidationError("Must be short")
-
-            func validate(input: String) -> Bool {
-                input.count <= 4
-            }
+    func validationRuleCollectionsReturnErrors() async {
+        let shortRule = ValidationRule { input in
+            input.count <= 4 ? nil : ValidationError("Must be short")
         }
+        let rules: [ValidationRule] = [.nonEmpty(message: "Required"), shortRule]
 
-        let rules: [any ValidationRule] = [NonEmptyRule(message: "Required"), ShortRule()]
-
-        #expect(rules.validate("").map(\.message) == ["Required"])
-        #expect(rules.validate("abcdefgh").map(\.message) == ["Must be short"])
-        #expect(rules.validate("abc").isEmpty)
+        await #expect(rules.validate("").map(\.message) == ["Required"])
+        await #expect(rules.validate("abcdefgh").map(\.message) == ["Must be short"])
+        await #expect(rules.validate("abc").isEmpty)
     }
 
-    @Test("a custom PredicateValidationRule returns nil when its predicate passes and its own error when the predicate fails")
-    func predicateValidationRulesBridgeToValidationErrors() {
-        struct EvenLengthRule: PredicateValidationRule {
-            let error = ValidationError("Must have even length")
-
-            func validate(input: String) -> Bool {
-                input.count.isMultiple(of: 2)
-            }
+    @Test("a rule's error message can be computed dynamically from the input it rejects")
+    func validationRulesCanReportDynamicMessages() async {
+        let rule = ValidationRule { input in
+            input.count.isMultiple(of: 2) ? nil : ValidationError("'\(input)' must have even length")
         }
 
-        let rule = EvenLengthRule()
+        await #expect(rule("ab") == nil)
+        await #expect(rule("abc")?.message == "'abc' must have even length")
+    }
 
-        #expect(rule.validate("ab") == nil)
-        #expect(rule.validate("abc") == rule.error)
+    @Test("a rule's closure can await asynchronous work before returning its verdict")
+    func validationRulesCanBeAsynchronous() async {
+        let rule = ValidationRule { input in
+            await Task.yield()
+            return input == "known" ? nil : ValidationError("Unknown value")
+        }
+
+        await #expect(rule("known") == nil)
+        await #expect(rule("other")?.message == "Unknown value")
     }
 }

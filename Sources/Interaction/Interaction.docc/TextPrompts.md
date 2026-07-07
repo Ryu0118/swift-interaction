@@ -12,7 +12,7 @@ which does the actual reading:
 ```swift
 let terminal = Terminal()
 
-let name = terminal.readText(
+let name = await terminal.readText(
     TextPrompt(message: "What is your name?")
 )
 ```
@@ -20,7 +20,7 @@ let name = terminal.readText(
 Or, using the shortcut that skips building the struct yourself:
 
 ```swift
-let name = terminal.textPrompt(prompt: "What is your name?")
+let name = await terminal.textPrompt(prompt: "What is your name?")
 ```
 
 Both calls are equivalent. The shortcut's parameter is named `prompt:` but it
@@ -32,7 +32,7 @@ fills in `TextPrompt.message`.
 rendered alongside it. Both are optional and default to `nil`:
 
 ```swift
-let path = terminal.readText(
+let path = await terminal.readText(
     TextPrompt(
         title: "Project Setup",
         message: "Where should the project be created?",
@@ -48,44 +48,50 @@ will not accept an answer until every rule passes. On failure, the terminal
 prints each rule's error message and asks again:
 
 ```swift
-let moduleName = terminal.readText(
+let moduleName = await terminal.readText(
     TextPrompt(
         message: "Module name",
-        validationRules: [NonEmptyRule()]
+        validationRules: [.nonEmpty()]
     )
 )
 ```
 
-``NonEmptyRule`` is the only validation rule the library ships. It rejects an
-empty string (`input.isEmpty`). Note that this checks for *empty*, not
-*blank*: a string of only spaces passes.
+``ValidationRule/nonEmpty(message:)`` is the only rule the library ships.
+It rejects an empty string (`input.isEmpty`). Note that this checks for
+*empty*, not *blank*: a string of only spaces passes.
 
 #### Writing your own validation rule
 
-Conform to ``ValidationRule`` directly if you need full control over the
-returned error:
+``ValidationRule`` is a plain value type backed by a closure, so you write
+one by calling its initializer rather than declaring a conforming type. The
+closure receives the input and returns the error to show, or `nil` when the
+input is valid:
 
 ```swift
-struct MaxLengthRule: ValidationRule {
-    let limit: Int
-
-    func validate(_ input: String) -> ValidationError? {
-        input.count <= limit ? nil : ValidationError("Must be \(limit) characters or fewer.")
-    }
+let maxLength = ValidationRule { input in
+    input.count <= 40 ? nil : ValidationError("Must be 40 characters or fewer.")
 }
 ```
 
-For the common case of "a predicate plus one fixed error message", conform to
-``PredicateValidationRule`` instead. It supplies `validate(_:)` for you from
-a simpler `validate(input:)` boolean and an `error`:
+Because the error is computed from the closure body rather than fixed ahead
+of time, the message can reference the offending input directly:
 
 ```swift
-struct AlphanumericRule: PredicateValidationRule {
-    let error = ValidationError("Only letters and numbers are allowed.")
+let alphanumeric = ValidationRule { input in
+    input.allSatisfy(\.isLetter) || input.allSatisfy(\.isNumber)
+        ? nil
+        : ValidationError("'\(input)' must contain only letters and numbers.")
+}
+```
 
-    func validate(input: String) -> Bool {
-        input.allSatisfy(\.isLetter) || input.allSatisfy(\.isNumber)
-    }
+The closure may also be asynchronous, which is useful for rules that check
+against the filesystem or another external source:
+
+```swift
+let fileExists = ValidationRule { input in
+    await FileManager.default.fileExists(atPath: input)
+        ? nil
+        : ValidationError("No file exists at that path.")
 }
 ```
 
