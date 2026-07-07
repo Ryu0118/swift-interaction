@@ -27,9 +27,7 @@ terminal UI layer.
 - ``TextPrompt``
 - ``ConfirmationPrompt``
 - ``ValidationRule``
-- ``PredicateValidationRule``
 - ``ValidationError``
-- ``NonEmptyRule``
 
 ### Choice Menus
 

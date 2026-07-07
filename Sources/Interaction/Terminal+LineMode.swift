@@ -4,13 +4,13 @@ import Foundation
 /// (e.g. piped input/output, CI logs): plain `readLine()`-based prompts
 /// instead of the raw-mode, redrawing interactive loops.
 extension Terminal {
-    func readTextByLine(_ prompt: TextPrompt) -> String {
+    func readTextByLine(_ prompt: TextPrompt) async -> String {
         while true {
             renderTitle(prompt.title)
             output.write("\(styleRenderer.render(prompt.message)) ")
 
             let answer = readLineOrAbort()
-            let errors = prompt.validationRules.validate(answer)
+            let errors = await prompt.validationRules.validate(answer)
             guard errors.isEmpty else {
                 for error in errors {
                     writeStatus(.failure, "\(error.message)")

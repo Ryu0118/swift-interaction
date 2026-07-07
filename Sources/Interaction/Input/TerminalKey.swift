@@ -30,11 +30,18 @@ public protocol KeyInput: Sendable {
     func readKey() -> TerminalKey?
     /// Runs the body with the input source in raw mode when supported.
     func withRawInput<Result>(_ body: () throws -> Result) rethrows -> Result
+    /// Runs the asynchronous body with the input source in raw mode when supported.
+    func withRawInput<Result>(_ body: () async throws -> Result) async rethrows -> Result
 }
 
 public extension KeyInput {
     /// Runs the body without changing any terminal modes.
     func withRawInput<Result>(_ body: () throws -> Result) rethrows -> Result {
         try body()
+    }
+
+    /// Runs the asynchronous body without changing any terminal modes.
+    func withRawInput<Result>(_ body: () async throws -> Result) async rethrows -> Result {
+        try await body()
     }
 }

@@ -18,7 +18,7 @@ import Interaction
 
 let terminal = Terminal()
 
-let name = terminal.readText(TextPrompt(message: "What is your name?"))
+let name = await terminal.readText(TextPrompt(message: "What is your name?"))
 let proceed = terminal.confirm(ConfirmationPrompt(question: "Continue?"))
 ```
 

@@ -31,6 +31,20 @@ public struct StandardKeyInput: KeyInput {
         return try body()
     }
 
+    /// Puts the terminal into raw input mode for the duration of the asynchronous body.
+    public func withRawInput<Result>(_ body: () async throws -> Result) async rethrows -> Result {
+        var original = termios()
+        guard tcgetattr(STDIN_FILENO, &original) == 0 else {
+            return try await body()
+        }
+
+        var raw = original
+        raw.c_lflag &= ~tcflag_t(ECHO | ICANON | ISIG)
+        tcsetattr(STDIN_FILENO, TCSANOW, &raw)
+        defer { tcsetattr(STDIN_FILENO, TCSANOW, &original) }
+        return try await body()
+    }
+
     private func readByte() -> UInt8? {
         var byte: UInt8 = 0
         let count = read(STDIN_FILENO, &byte, 1)

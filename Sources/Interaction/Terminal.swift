@@ -9,7 +9,7 @@ public protocol InteractionProviding: Sendable {
     /// Writes a rendered table.
     func writeTable(_ table: Table)
     /// Reads a text answer from the user.
-    func readText(_ prompt: TextPrompt) -> String
+    func readText(_ prompt: TextPrompt) async -> String
     /// Reads a yes/no answer from the user.
     func confirm(_ prompt: ConfirmationPrompt) -> Bool
     /// Reads one choice from the user.
@@ -66,13 +66,13 @@ public struct Terminal: InteractionProviding {
     }
 
     /// Prompts until the user enters text that passes validation.
-    public func readText(_ prompt: TextPrompt) -> String {
+    public func readText(_ prompt: TextPrompt) async -> String {
         guard capabilities.isInteractive else {
-            return readTextByLine(prompt)
+            return await readTextByLine(prompt)
         }
-        return resolve(keyInput.withRawInput {
+        return await resolve(keyInput.withRawInput {
             var loop = TextPromptLoop(prompt: prompt, output: output, styleRenderer: styleRenderer)
-            return loop.run(keys: keyInput)
+            return await loop.run(keys: keyInput)
         })
     }
 

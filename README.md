@@ -13,8 +13,8 @@ Interaction gives any macOS Swift CLI a polished, testable terminal UI layer.
 
 ## Features
 
-- ⌨️ Read validated text input using the built-in `NonEmptyRule` or your own
-  types conforming to `ValidationRule` and `PredicateValidationRule`.
+- ⌨️ Read validated text input using the built-in `ValidationRule.nonEmpty`
+  or your own async-capable `ValidationRule` closures.
 - 📋 Present arrow-key navigable, filterable single- and multiple-choice menus.
 - 🎨 Render semantic ANSI-styled text and aligned tables that degrade
   gracefully in non-TTY contexts.

@@ -9,14 +9,14 @@ public struct TextPrompt: Sendable {
     /// Whether the prompt collapses after an answer is accepted.
     public let collapsesOnAnswer: Bool
     /// Validation rules applied to the entered answer.
-    public let validationRules: [any ValidationRule]
+    public let validationRules: [ValidationRule]
 
     public init(
         title: StyledText? = nil,
         message: StyledText,
         description: StyledText? = nil,
         collapsesOnAnswer: Bool = true,
-        validationRules: [any ValidationRule] = [],
+        validationRules: [ValidationRule] = [],
     ) {
         self.title = title
         self.message = message

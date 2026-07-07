@@ -1,26 +1,5 @@
 import Foundation
 
-/// Validates a text prompt answer.
-public protocol ValidationRule: Sendable {
-    /// Returns a validation error when the input is invalid.
-    func validate(_ input: String) -> ValidationError?
-}
-
-/// A validation rule defined by a pass/fail predicate and a fixed error.
-public protocol PredicateValidationRule: ValidationRule {
-    /// The error reported when the predicate fails.
-    var error: ValidationError { get }
-    /// Returns whether the input passes the rule.
-    func validate(input: String) -> Bool
-}
-
-public extension PredicateValidationRule {
-    /// Returns the fixed error when the predicate fails.
-    func validate(_ input: String) -> ValidationError? {
-        validate(input: input) ? nil : error
-    }
-}
-
 /// A user-facing validation failure.
 public struct ValidationError: LocalizedError, Equatable, Sendable {
     /// The validation message to display.
@@ -35,22 +14,58 @@ public struct ValidationError: LocalizedError, Equatable, Sendable {
     }
 }
 
-/// Requires non-empty text input.
-public struct NonEmptyRule: ValidationRule {
-    private let message: String
+/// A composable rule for validating text prompt input.
+///
+/// Construct one from a closure that inspects the input and returns the
+/// error to display, or `nil` when the input is valid:
+///
+/// ```swift
+/// let maxLength = ValidationRule { input in
+///     input.count <= 40 ? nil : ValidationError("Must be 40 characters or fewer.")
+/// }
+/// ```
+///
+/// A rule's closure may be asynchronous, which makes it possible to validate
+/// against the filesystem or another external source:
+///
+/// ```swift
+/// let fileExists = ValidationRule { input in
+///     await FileManager.default.fileExists(atPath: input)
+///         ? nil : ValidationError("No file exists at that path.")
+/// }
+/// ```
+public struct ValidationRule: Sendable {
+    private let validate: @Sendable (String) async -> ValidationError?
 
-    public init(message: String = "Input cannot be empty.") {
-        self.message = message
+    /// Creates a rule from a closure that returns the failure error, if any.
+    public init(_ validate: @escaping @Sendable (String) async -> ValidationError?) {
+        self.validate = validate
     }
 
-    /// Validates that the input is not empty.
-    public func validate(_ input: String) -> ValidationError? {
-        input.isEmpty ? ValidationError(message) : nil
+    /// Runs the rule against `input`, returning its failure error, if any.
+    public func callAsFunction(_ input: String) async -> ValidationError? {
+        await validate(input)
     }
 }
 
-public extension Collection<any ValidationRule> {
-    func validate(_ input: String) -> [ValidationError] {
-        compactMap { $0.validate(input) }
+public extension ValidationRule {
+    /// Requires non-empty text input.
+    static func nonEmpty(message: String = "Input cannot be empty.") -> ValidationRule {
+        ValidationRule { input in
+            input.isEmpty ? ValidationError(message) : nil
+        }
+    }
+}
+
+public extension Sequence<ValidationRule> {
+    /// Runs every rule against `input`, collecting every failure instead of stopping at the first one.
+    func validate(_ input: String) async -> [ValidationError] {
+        var errors: [ValidationError] = []
+        for rule in self {
+            if let error = await rule(input) {
+                errors.append(error)
+            }
+        }
+        return errors
     }
 }

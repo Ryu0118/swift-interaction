@@ -12,7 +12,7 @@ struct TextPromptLoop {
         block = BlockRenderer(output: output)
     }
 
-    mutating func run(keys: any KeyInput) -> InteractiveOutcome<String> {
+    mutating func run(keys: any KeyInput) async -> InteractiveOutcome<String> {
         render()
 
         while true {
@@ -38,7 +38,7 @@ struct TextPromptLoop {
             case .up, .down:
                 break
             case .enter:
-                errors = prompt.validationRules.validate(buffer.text)
+                errors = await prompt.validationRules.validate(buffer.text)
                 if errors.isEmpty {
                     finish()
                     return .answered(buffer.text)
