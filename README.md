@@ -50,7 +50,7 @@ import Interaction
 let terminal = Terminal()
 
 // Text input
-let name = terminal.readText(TextPrompt(message: "What is your name?"))
+let name = await terminal.readText(TextPrompt(message: "What is your name?"))
 
 // Yes/no confirmation
 let proceed = terminal.confirm(ConfirmationPrompt(question: "Continue?"))
