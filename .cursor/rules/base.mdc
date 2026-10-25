@@ -6,7 +6,11 @@ A Swift library for building terminal UIs on macOS 26+: text prompts, single/mul
 
 | Path | Purpose |
 |------|---------|
-| `Sources/Interaction/` | **All implementation**. Prompts, choice loops, selection state, table/styled-text rendering, validation, terminal capabilities |
+| `Sources/Interaction/` | Module root: `Terminal.swift` (entry point + interactive prompt routing), `Terminal+LineMode.swift` (non-interactive `readLine()` fallback), `Table.swift`, `Validation.swift`, `InteractionProviding+*.swift` convenience extensions |
+| `Sources/Interaction/Selection/` | `ChoiceOption`, single/multiple selection state machines |
+| `Sources/Interaction/Input/` | Terminal key vocabulary, raw-input reader, capability detection |
+| `Sources/Interaction/Styling/` | `StyledText`, its renderer, terminal display-width calculation |
+| `Sources/Interaction/Prompts/` | Prompt config types, per-prompt-kind interactive loops, shared block-redraw/rendering helpers |
 | `Sources/Interaction/Interaction.docc/` | DocC catalog: landing page and Getting Started |
 | `Tests/InteractionTests/` | Unit tests |
 
